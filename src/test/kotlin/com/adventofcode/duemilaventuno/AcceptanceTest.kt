@@ -7,7 +7,6 @@ import kotlin.test.assertEquals
 class AcceptanceTest {
 
     @Test
-    @Disabled
     internal fun acceptance() {
         val diagnosticBits =    "00100\n" +
                                 "11110\n" +
@@ -32,12 +31,15 @@ class AcceptanceTest {
 }
 
 class Diagnostic {
-    fun report(): Short {
-        return 0
+    private var probe: Probe = Probe(5)
+    private var parser: BeaconParser = BeaconParser()
+
+    fun report(): Int {
+        return probe.calculatePowerIndex()
     }
 
     fun registerBeacons(diagnosticBits: String) {
-        TODO("Not yet implemented")
+        probe.register(parser.parse(diagnosticBits))
     }
 
 }

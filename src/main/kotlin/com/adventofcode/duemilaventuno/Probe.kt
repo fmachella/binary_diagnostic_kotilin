@@ -2,18 +2,16 @@ package com.adventofcode.duemilaventuno
 
 class Probe(signalsPerBeacons: Int) {
     private val beaconsPerColum: Array<MutableList<Short>> =
-        arrayOf(mutableListOf(),
+        arrayOf(
             mutableListOf(),
             mutableListOf(),
             mutableListOf(),
-            mutableListOf())
+            mutableListOf(),
+            mutableListOf()
+        )
 
     fun register(beacons: List<Beacon>) {
-        beaconsPerColum[0].addAll(beacons.map { it.elementAt(0) })
-        beaconsPerColum[1].addAll(beacons.map { it.elementAt(1) })
-        beaconsPerColum[2].addAll(beacons.map { it.elementAt(2) })
-        beaconsPerColum[3].addAll(beacons.map { it.elementAt(3) })
-        beaconsPerColum[4].addAll(beacons.map { it.elementAt(4) })
+        beaconsPerColum.forEachIndexed { index, beacon -> beacon.addAll(beacons.map { it.elementAt(index) }) }
     }
 
     fun calculateGamma(): Short {
@@ -37,6 +35,9 @@ class Probe(signalsPerBeacons: Int) {
             .toShort(2)
     }
 
-    private fun invert(it: Short) = if (it == 0.toShort()) 1 else 0
+    fun calculatePowerIndex(): Int {
+        return calculateEpsilon() * calculateGamma();
+    }
 
+    private fun invert(it: Short) = if (it == 0.toShort()) 1 else 0
 }
