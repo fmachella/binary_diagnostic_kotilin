@@ -1,0 +1,27 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+}
+
+group = 'com.adventofcode'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+test {
+    useJUnitPlatform()
+    outputs.upToDateWhen { false }
+    testLogging {
+        events "passed", "skipped", "failed" //, "standardOut", "standardError"
+        exceptionFormat "full"
+    }
+}
+
+kotlin {
+    jvmToolchain(8)
+}
